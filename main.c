@@ -8,41 +8,41 @@
 
 int main(void)
 {
-	char *command, *token, *args[1024];
+	char *command = NULL, *token, *args[1024];
 	size_t command_len = 0;
 	int i = 0, status = 0;
 	pid_t pid;
 
-	while (1)
+	while (printf("$ ") && getline(&command, &command_len, stdin) != -1)
 	{
-		printf("$ ");
-		fflush(stdout);
-		if (getline(&command, &command_len, stdin) == -1)
-			break;
-
-		token = strtok(command, " \n");
-		i = 0;
-		while (token != NULL)
+		for (i = 0, token = strtok(command, " \n");
+				token; token = strtok(NULL, " \n"))
 		{
 			if (token[0] == '#')
 				break;
 			args[i++] = token;
-			token = strtok(NULL, " \n");
 		}
 		args[i] = NULL;
 		if (args[0] != NULL && _strcmp(args[0], "exit") == 0)
-		{
 			break;
-		}
 		handle_path(command);
 		if (args[0] != NULL && _strcmp(args[0], "cd") == 0)
-		{
 			handle_directory(args);
-		}
 		else
 		{
 			pid = fork();
-			process(pid, args, status);
+			if (pid == -1)
+			{
+				perror("fork");
+				exit(EXIT_FAILURE);
+			}
+			else if (pid == 0)
+			{
+				process(pid, args, status);
+				exit(EXIT_SUCCESS);
+			}
+			else
+				waitpid(pid, &status, 0);
 		}
 	}
 	free(command);
