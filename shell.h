@@ -20,7 +20,7 @@ extern char **environ;
 /* Functions */
 int _strcmp(const char *s1, const char *s2);
 void process(pid_t pid, char **args, int status);
-void handle_path(const char *command);
+char *handle_path(const char *command);
 void noninteractive(int argc, char **argv);
 void handle_directory(char **args);
 

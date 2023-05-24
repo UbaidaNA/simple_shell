@@ -23,6 +23,6 @@ void process(pid_t pid, char **args, int status)
 	}
 	else
 	{
-		waitpid(pid, &status, 0);
+		waitpid(pid, &status, WNOHANG);
 	}
 }
