@@ -13,13 +13,13 @@ void process(pid_t pid, char **args, int status)
 	if (pid == -1)
 	{
 		perror("fork");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	else if (pid == 0)
 	{
 		execvp(args[0], args);
 		perror("./hsh");
-		_exit(EXIT_FAILURE);
+		_exit(0);
 	}
 	else
 	{
