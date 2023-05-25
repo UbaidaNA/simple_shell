@@ -93,7 +93,7 @@ free(command);
 exit(0);
 }
 EXIT_CODE = strtol(args[1], &checker, 10);
-if (*checker != '\0')
+if (*checker != '\0' || EXIT_CODE < 0)
 {
 fprintf(stderr, "%s: Illegal number: %s\n", command, args[1]);
 free(args);
