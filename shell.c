@@ -31,7 +31,7 @@ exit(EXIT_SUCCESS);
 }
 if (line[len - 1] == '\n')
 {
-			line[len - 1] = '\0';
+line[len - 1] = '\0';
 }
 }
 return (line);
@@ -65,7 +65,7 @@ position++;
 if (position >= bufsize)
 {
 bufsize += BUFSIZE;
-tokens = realloc(tokens, bufsize * sizeof(char *));
+tokens = realloc(tokens, bufsize *sizeof(char *));
 if (!tokens)
 {
 free(token);

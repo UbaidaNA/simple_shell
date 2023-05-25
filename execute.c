@@ -31,12 +31,10 @@ builtin_t builtin[] = {
 {"cd", change_directory},
 {NULL, NULL}
 };
-
 if (args[0] == NULL)
 {
 return (1);
 }
-
 while (builtin[i].name)
 {
 if (strcmp(args[0], builtin[i].name) == 0)
@@ -58,13 +56,10 @@ free(line);
 exit(126);
 }
 else if (pid < 0)
-{
 perror("fork");
-}
 else
-{
 wait(&status);
-}
+
 return (1);
 }
 
