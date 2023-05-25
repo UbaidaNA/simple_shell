@@ -25,7 +25,7 @@ int main(void)
 		args[i] = NULL;
 		if (args[0] != NULL && _strcmp(args[0], "exit") == 0)
 			break;
-		handle_path(command);
+		handle_path(args[0]);
 		if (args[0] != NULL && _strcmp(args[0], "cd") == 0)
 			handle_directory(args);
 		else
