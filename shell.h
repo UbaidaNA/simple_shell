@@ -30,10 +30,10 @@ extern char **environ;
 
 
 /**
- * struct builtin - Struct format
+ * struct builtin - format
  *
- * @name: name of the builin
- * @f: The function associated
+ * @name: the name
+ * @f: the function
  */
 typedef struct builtin
 {

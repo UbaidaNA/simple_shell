@@ -1,33 +1,33 @@
 #include "shell.h"
 
 /**
- * comment - removes the comments from an input
- * @input: input
- * Return: input without comment
+ * comment - ignores comments
+ * @command: the command
+ * Return: command without comments
 */
 
-char *comment(char *input)
+char *comment(char *command)
 {
 int i;
 
-for (i = 0; input[i]; i++)
+for (i = 0; command[i]; i++)
 {
-if (input[0] == '#')
+if (command[0] == '#')
 {
-input[i] = '\0';
+command[i] = '\0';
 }
-else if ((input[i] == '#' && input[i - 1] == ' ')
-|| (input[i] == '|' && input[i]))
+else if ((command[i] == '#' && command[i - 1] == ' ')
+|| (command[i] == '|' && command[i]))
 {
-input[i] = '\0';
+command[i] = '\0';
 }
 else
 {
-input[i] = input[i];
+command[i] = command[i];
 }
 }
 
-return (input);
+return (command);
 }
 
 

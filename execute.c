@@ -8,18 +8,18 @@
  */
 void signHanlder(__attribute__((unused))int sig_num)
 {
-	write(1, "\n", 1);
-	fflush(stdin);
+write(1, "\n", 1);
+fflush(stdin);
 }
 
 /**
-	* handle_command - forks a child process
-	* @args: the arguments
-	* @line: the line
-	* Return: 0
-	*/
+* handle_command - forks a child process
+* @args: the arguments
+* @command: the line
+* Return: 0
+*/
 
-int handle_command(char **args, char *line)
+int handle_command(char **args, char *command)
 {
 int i = 0, status;
 pid_t pid;
@@ -39,7 +39,7 @@ while (builtin[i].name)
 {
 if (strcmp(args[0], builtin[i].name) == 0)
 {
-(builtin[i].f)(args, line);
+(builtin[i].f)(args, command);
 return (1);
 }
 i++;
@@ -51,7 +51,7 @@ if (execvp(args[0], args) == -1)
 {
 fprintf(stderr, "%s: command not found\n", args[0]);
 free(args);
-free(line);
+free(command);
 }
 exit(126);
 }
@@ -73,7 +73,7 @@ return (1);
 
 void shell(void)
 {
-int bufsize = BUFSIZE;
+int size = BUFSIZE;
 int piped = 0;
 int status;
 char *line = NULL;
@@ -84,7 +84,7 @@ if (!isatty(STDIN_FILENO))
 piped = 1;
 }
 do {
-char **args = malloc(bufsize * sizeof(char *));
+char **args = malloc(size * sizeof(char *));
 
 line = getinput(piped, line, args);
 line = comment(line);

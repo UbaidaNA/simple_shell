@@ -1,17 +1,17 @@
 #include "shell.h"
 
 /**
- * print_env - set a variable in the environ
- * @args: UNUSED
- * @line: line to free
+ * print_env - print variable in environ
+ * @args: ignored
+ * @command: command
  * Return: 0 if successful
 */
 
-int print_env(char **args, char *line)
+int print_env(char **args, char *command)
 {
 char **env = environ;
 
-disregard(line);
+disregard(command);
 disregard(args);
 
 while (*env)
@@ -26,15 +26,15 @@ return (0);
 
 
 /**
- * addenv - set a variable in the environ
+ * addenv - add variable in the environ
  * @args: parsed user input
- * @line: line to free
+ * @command: command
  * Return: 0 if successful
 */
 
-int addenv(char **args, char *line)
+int addenv(char **args, char *command)
 {
-disregard(line);
+disregard(command);
 
 if (!args[2] || args[3])
 {
@@ -51,14 +51,14 @@ return (0);
 
 
 /**
- * deleteenv - unset a variable in environ
+ * deleteenv - delete variable in environ
  * @args: parsed user input
- * @line: line to free
+ * @command: command
  * Return: 0 if successful
 */
-int deleteenv(char **args, char *line)
+int deleteenv(char **args, char *command)
 {
-disregard(line);
+disregard(command);
 
 if (!args[1] || args[2])
 {
@@ -75,13 +75,13 @@ return (0);
 
 
 /**
- * exit_shell - exit shell
- * @args: parsed user input
- * @line: line to free
- * Return: exit with custom exit code 0 per deualt or 2 on error
+ * exit_shell - exits shell
+ * @args: the arguments
+ * @command: command
+ * Return: (int)
 **/
 
-int exit_shell(char **args, char *line)
+int exit_shell(char **args, char *command)
 {
 int EXIT_CODE;
 char *checker;
@@ -89,7 +89,7 @@ char *checker;
 if (args[1] == NULL)
 {
 free(args);
-free(line);
+free(command);
 exit(0);
 }
 EXIT_CODE = strtol(args[1], &checker, 10);
@@ -101,27 +101,27 @@ if (*checker != '\0')
 {
 printf("%s", args[1]);
 free(args);
-free(line);
+free(command);
 exit(2);
 }
 free(args);
-free(line);
+free(command);
 exit(EXIT_CODE % 256);
 }
 
 
 /**
- * change_directory - changes the current working directory
- * @line: line to free
- * @args: the arguments for the cd command
- * Return: 0 if successful
+ * change_directory - replicate pwd
+ * @command: command
+ * @args: the arguments
+ * Return: (0)
  **/
-int change_directory(char **args, char *line)
+int change_directory(char **args, char *command)
 {
 char *previous = getenv("OLDPWD");
 char *current = getenv("PWD");
 
-disregard(line);
+disregard(command);
 if (args[1] == NULL)
 {
 if (chdir(getenv("HOME")) != 0)

@@ -1,54 +1,54 @@
 #include "shell.h"
 
 /**
- * getinput - reads input from the user
- * @is_piped: if in interactive mode
- * @line: line
- * @args: args
- * Return: a pointer to the input string
+ * getinput - reads input from command
+ * @is_piped: looks if it's piped
+ * @command: the command
+ * @args: the arguments
+ * Return: returns a pointer
  */
-char *getinput(int is_piped, char *line, char **args)
+char *getinput(int is_piped, char *command, char **args)
 {
-ssize_t len;
-size_t bufsize = 0;
+ssize_t length;
+size_t size = 0;
 
 if (!is_piped)
 {
 printf("$ ");
 fflush(stdout);
 signal(SIGINT, signHanlder);
-len = getline(&line, &bufsize, stdin);
+length = getline(&command, &size, stdin);
 }
 else
 {
 signal(SIGINT, signHanlder);
-len = getline(&line, &bufsize, stdin);
-if (len == -1)
+length = getline(&command, &size, stdin);
+if (length == -1)
 {
 free(args);
-free(line);
+free(command);
 exit(EXIT_SUCCESS);
 }
-if (line[len - 1] == '\n')
+if (command[length - 1] == '\n')
 {
-line[len - 1] = '\0';
+command[length - 1] = '\0';
 }
 }
-return (line);
+return (command);
 }
 
 
 /**
- * parse_input - parses the input into arguments
+ * parse_input - it parse the input
  *
- * @line: input string
- * @tokens: tokens to store
+ * @command: command
+ * @tokens: tokens from the command
  * Return: a pointer to an array of arguments
  */
 
-char **parse_input(char *line, char **tokens)
+char **parse_input(char *command, char **tokens)
 {
-int bufsize = BUFSIZE, position = 0;
+int size = BUFSIZE, position = 0;
 char *token;
 
 if (!tokens)
@@ -57,15 +57,15 @@ perror("Allocation error\n");
 exit(EXIT_FAILURE);
 }
 
-token = strtok(line, TOKEN_DELIM);
+token = strtok(command, TOKEN_DELIM);
 while (token != NULL)
 {
 tokens[position] = token;
 position++;
-if (position >= bufsize)
+if (position >= size)
 {
-bufsize += BUFSIZE;
-tokens = realloc(tokens, bufsize *sizeof(char *));
+size += BUFSIZE;
+tokens = realloc(tokens, size *sizeof(char *));
 if (!tokens)
 {
 free(token);
