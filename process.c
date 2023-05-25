@@ -19,7 +19,7 @@ void process(pid_t pid, char **args, int status)
 	{
 		execvp(args[0], args);
 		perror("./hsh");
-		_exit(0);
+		exit(0);
 	}
 	else
 	{
