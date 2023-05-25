@@ -19,9 +19,6 @@ extern char **environ;
 
 /* Functions */
 int _strcmp(const char *s1, const char *s2);
-void process(pid_t pid, char **args, int status);
-void handle_path(const char *command);
-void handle_directory(char **args);
 
 /**
  * struct builtin - Struct format
