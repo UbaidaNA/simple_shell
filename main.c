@@ -1,50 +1,18 @@
 #include "shell.h"
 
-
 /**
- * main - interactive shell
- *
- * Return: (0)
- */
+	* main - entry point to program
+	* @ac: the number of arguments passed
+	* @av: a pointer to an array of arguments
+	* Return: 0
+*/
 
-int main(void)
-{
-char *command = NULL, *args[2], *token;
-size_t command_len = 0;
-pid_t pid;
-int status;
 
-while (1)
+int main(int ac, char **av)
 {
-printf("$ ");
-fflush(stdout);
-if (getline(&command, &command_len, stdin) == -1)
-break;
-if (strcmp(command, "\n") == 0)
-continue;
+	disregard(ac);
+	disregard(av);
+	shell();
+	return (0);
+}
 
-token = strtok(command, " \n");
-args[0] = token;
-args[1] = NULL;
-pid = fork();
-if (pid == -1)
-{
-perror("fork");
-exit(0);
-}
-else if (pid == 0)
-{
-if (execvp(args[0], args) == -1)
-{
-perror(args[0]);
-exit(1);
-}
-}
-else
-{
-waitpid(pid, &status, 0);
-}
-free(command);
-}
-return (0);
-}
