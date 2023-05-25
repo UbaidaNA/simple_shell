@@ -23,4 +23,17 @@ void process(pid_t pid, char **args, int status);
 void handle_path(const char *command);
 void handle_directory(char **args);
 
+/**
+ * struct builtin - Struct format
+ *
+ * @name: name of the builin
+ * @f: The function associated
+ */
+
+typedef struct builtin
+{
+	char *name;
+	int (*f)(char **args, char *line);
+} builtin_t;
+
 #endif
