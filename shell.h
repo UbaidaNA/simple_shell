@@ -18,7 +18,7 @@
 extern char **environ;
 
 /* Functions */
-int _strcmp(const char *s1, const char *s2);
+
 
 /**
  * struct builtin - Struct format
