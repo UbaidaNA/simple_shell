@@ -13,7 +13,7 @@ int main(void)
 	int i = 0, status = 0;
 	pid_t pid;
 
-	while (printf("$ ") && getline(&command, &command_len, stdin) != -1)
+	while (printf(" ") && getline(&command, &command_len, stdin) != -1)
 	{
 		for (i = 0, token = strtok(command, " \n");
 				token; token = strtok(NULL, " \n"))
