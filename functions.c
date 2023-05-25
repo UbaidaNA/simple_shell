@@ -86,7 +86,7 @@ int exit_shell(char **args, char *command)
 int EXIT_CODE;
 char *checker;
 
-if (args[1] == NULL)
+if (strcmp(args[0], "exit") = 0)
 {
 free(args);
 free(command);
@@ -101,7 +101,7 @@ if (*checker != '\0')
 {
 printf("%s", args[1]);
 free(args);
-free(command);
+free(command);i
 exit(2);
 }
 free(args);

@@ -22,6 +22,7 @@ int addenv(char **args, char *line);
 int deleteenv(char **args, char *line);
 int print_env(char **args, char *line);
 char *comment(char *input);
+int _strcmp(const char *s1, const char *s2);
 
 extern char **environ;
 #define disregard(y) (void)(y)
