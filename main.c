@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * main - interactive shell
  *
@@ -18,13 +19,10 @@ while (1)
 printf("$ ");
 fflush(stdout);
 if (getline(&command, &command_len, stdin) == -1)
-{
 break;
-}
 if (strcmp(command, "\n") == 0)
-{
 continue;
-}
+
 token = strtok(command, " \n");
 args[0] = token;
 args[1] = NULL;
@@ -36,15 +34,17 @@ exit(0);
 }
 else if (pid == 0)
 {
-execvp(args[0], args);
-perror("Error");
-exit(0);
+if (execvp(args[0], args) == -1)
+{
+perror(args[0]);
+exit(1);
+}
 }
 else
 {
 waitpid(pid, &status, 0);
 }
-}
 free(command);
+}
 return (0);
 }
