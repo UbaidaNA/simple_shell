@@ -27,7 +27,7 @@ if (length == -1)
 {
 free(args);
 free(command);
-exit(EXIT_SUCCESS);
+exit(0);
 }
 if (command[length - 1] == '\n')
 {
@@ -54,7 +54,7 @@ char *token;
 if (!tokens)
 {
 perror("Allocation error\n");
-exit(EXIT_FAILURE);
+exit(1);
 }
 
 token = strtok(command, TOKEN_DELIM);
@@ -70,7 +70,7 @@ if (!tokens)
 {
 free(token);
 perror("Allocation error\n");
-exit(EXIT_FAILURE);
+exit(1);
 }
 }
 
