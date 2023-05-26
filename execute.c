@@ -39,7 +39,8 @@ while (builtin[i].name)
 {
 if (strcmp(args[0], builtin[i].name) == 0)
 {
-return ((builtin[i].f)(args, command));
+(builtin[i].f)(args, command);
+return (1);
 }
 i++;
 }
