@@ -22,8 +22,6 @@ int addenv(char **args, char *line);
 int deleteenv(char **args, char *line);
 int print_env(char **args, char *line);
 char *comment(char *input);
-void execute_command(char *command);
-void handle_commands(char *commands);
 
 extern char **environ;
 #define disregard(y) (void)(y)
