@@ -60,7 +60,7 @@ perror("fork");
 else
 wait(&status);
 
-return (WEXITSTATUS(status));
+return (1);
 }
 
 

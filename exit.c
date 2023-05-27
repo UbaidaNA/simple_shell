@@ -25,7 +25,7 @@ if (*checker != '\0' || EXIT_CODE < 0)
 fprintf(stderr, "%s: Illegal number: %s\n", command, args[1]);
 free(args);
 free(command);
-exit(2);
+exit(1);
 }
 free(args);
 free(command);
