@@ -12,15 +12,15 @@
 #include <signal.h>
 
 void shell(void);
-void signHanlder(__attribute__((unused))int sig_num);
 char *getinput(int piped, char *line, char **args);
-char **parse_input(char *line, char **tokens);
+char **parse_input(char *command, char **tokens);
 int handle_command(char **args, char *line);
 int change_directory(char **args, char *line);
-int exit_shell(char **args, char *line);
 int addenv(char **args, char *line);
 int deleteenv(char **args, char *line);
 int print_env(char **args, char *line);
+void signHanlder(__attribute__((unused))int sig_num);
+int exit_shell(char **args, char *line);
 char *comment(char *input);
 
 extern char **environ;
@@ -31,10 +31,11 @@ extern char **environ;
 
 /**
  * struct builtin - format
- *
  * @name: the name
  * @f: the function
  */
+
+
 typedef struct builtin
 {
 	char *name;

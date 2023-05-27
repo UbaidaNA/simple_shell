@@ -64,36 +64,5 @@ return (1);
 }
 
 
-/**
- * shell - runs the shell
- *
- * Return: void
- */
-
-
-void shell(void)
-{
-int size = BUFSIZE;
-int piped = 0;
-int status;
-char *line = NULL;
-
-
-if (!isatty(STDIN_FILENO))
-{
-piped = 1;
-}
-do {
-char **args = malloc(size * sizeof(char *));
-
-line = getinput(piped, line, args);
-line = comment(line);
-args = parse_input(line, args);
-status = handle_command(args, line);
-
-free(args);
-free(line);
-} while (status);
-}
 
 
